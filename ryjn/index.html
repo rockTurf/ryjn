@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link href="static/bootstrap-datetimepicker-master/sample in bootstrap v2/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="static/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+</head>
+
+<body>
+<div class="container">
+    <form action="" class="form-horizontal">
+        <fieldset>
+            <legend>day month quarter year</legend>
+            <div class="col-sm-3">
+				 type select: <select id="dimension" onchange="changeryjn(this.value)">
+				 	<option value="0">please select..</option>
+				 	<option value="day">day</option>
+				 	<option value="month">month</option>
+				 	<option value="quarter">quarter</option>
+				 	<option value="year">year</option>
+				 </select>
+			</div>
+			<div style="margin: 10px">
+			date pick: <input type="text" id="ryjn" readonly class="form_datetime">
+			<select id="season" style="display:none">
+					<option value="1">quarter 1st</option>
+					<option value="2">quarter 2nd</option>
+					<option value="3">quarter 3rd</option>
+					<option value="4">quarter 4th</option>
+			</select>
+			</div>
+			<div>
+				<input type="button" value="test" onclick="subDate()">
+			</div>
+			<div>
+				you select: <input name="result" id="result"/>
+			</div>
+        </fieldset>
+    </form>
+</div>
+<script type="text/javascript" src="static/bootstrap-datetimepicker-master/sample in bootstrap v2/jquery/jquery-1.8.3.min.js" charset="UTF-8"></script>
+<script type="text/javascript" src="static/bootstrap-datetimepicker-master/sample in bootstrap v2/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="static/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="static/bootstrap-datetimepicker-master/js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
+<script type="text/javascript">
+    
+ function changeryjn(val){
+	if(val=='day'){
+		$("#season").attr("style","display:none");
+		$(".form_datetime").datetimepicker('remove');
+		$(".form_datetime").datetimepicker({
+			format: 'yyyy-mm-dd',
+			autoclose:true,
+			startView:2,
+			minView:2,
+			bootcssVer:3,
+			todayBtn : true
+		});
+	}else if(val=='month'){
+		$("#season").attr("style","display:none");
+		$(".form_datetime").datetimepicker('remove');
+		$(".form_datetime").datetimepicker({
+			format: 'yyyy-mm',
+			autoclose:true,
+			startView:3,
+			minView:3,
+			bootcssVer:3,
+			todayBtn : true
+		});
+	}else if(val=='quarter'){
+		$("#season").removeAttr("style");
+		$(".form_datetime").datetimepicker('remove');
+		$(".form_datetime").datetimepicker({
+			format: 'yyyy',
+			autoclose:true,
+			startView:4,
+			minView:4,
+			bootcssVer:3,
+			todayBtn : true
+		});
+	}else if(val=='year'){
+		$("#season").attr("style","display:none");
+		$(".form_datetime").datetimepicker('remove');
+		$(".form_datetime").datetimepicker({
+			format: 'yyyy',
+			autoclose:true,
+			startView:4,
+			minView:4,
+			bootcssVer:3,
+			todayBtn : true
+		});
+	}else{
+		$("#season").attr("style","display:none");
+		$(".form_datetime").datetimepicker('remove');
+	}
+}
+
+function subDate(){
+	var type = document.getElementById("dimension").value;//day month quarter year
+	var date = document.getElementById("ryjn").value; //date
+	if(type=="quarter"){
+		date = date + document.getElementById("season").value;
+	}
+	document.getElementById("result").value=type+" "+date;
+}
+</script>
+
+</body>
+</html>
